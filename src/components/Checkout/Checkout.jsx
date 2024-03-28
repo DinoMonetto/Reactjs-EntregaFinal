@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { CartContext } from "../../context/CartContext";
 import {
@@ -13,11 +13,17 @@ import {
 } from "firebase/firestore";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import "./Checkout.css";
+import Cart from "../Cart/Cart";
+
 
 const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [orderId, setOrderId] = useState("");
-  const { cart, total, clearCart } = useContext(CartContext);
+  const { cart, totalPrice, clearCart } = useContext(CartContext);
+
+  useEffect(() => {
+    console.log("orderId:", orderId); 
+  }, [orderId]);
 
   const createOrder = async ({ name, phone, email }) => {
     setLoading(true);
@@ -30,7 +36,7 @@ const Checkout = () => {
           email,
         },
         items: cart,
-        total: total,
+        total: totalPrice,
         date: Timestamp.fromDate(new Date()),
       };
       const batch = writeBatch(db);
@@ -75,7 +81,7 @@ const Checkout = () => {
         setOrderId(orderAdded.id);
         clearCart();
       } else {
-        console.error("No hay stock");
+        console.error("No hay stock"); 
       }
     } catch (error) {
       console.log(error);
