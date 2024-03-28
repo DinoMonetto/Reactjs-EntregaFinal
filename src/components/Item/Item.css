@@ -1,0 +1,28 @@
+.item-container {
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.item-container h1 {
+    margin-bottom: 5px;
+}
+
+.item-container img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.item-container p {
+    margin-bottom: 5px;
+}
+
+.item-container a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: blue;
+}
